@@ -493,6 +493,19 @@ CREATE TABLE `x_packages` (
   PRIMARY KEY (`pk_id_pk`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `x_forwarded_domains` (
+ `fd_id_pk` int(11) NOT NULL AUTO_INCREMENT,
+  `vh_fk_id` int(11) NOT NULL DEFAULT '0',
+  `fd_acc_fk` int(11) NOT NULL DEFAULT '0',
+  `fd_name` varchar(75) NOT NULL DEFAULT '',
+  `fd_type_id` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1=redirect, 2=forward',
+  `fd_protocol` varchar(5) NOT NULL DEFAULT 'http',
+  `www_yn` tinyint(1) NOT NULL DEFAULT '1',
+  `fd_created_ts` int(30) NOT NULL DEFAULT '0',
+  `fd_deleted_ts` int(30) DEFAULT NULL,
+  PRIMARY KEY (`fd_id_pk`)
+  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
 /*Data for the table `x_packages` */
 
 insert  into `x_packages`(`pk_id_pk`,`pk_name_vc`,`pk_reseller_fk`,`pk_enablephp_in`,`pk_created_ts`,`pk_deleted_ts`) values (1,'Administration',1,1,NULL,NULL);
@@ -568,6 +581,7 @@ CREATE TABLE `x_quotas` (
   `qt_totalbw_fk` int(30) DEFAULT NULL,
   `qt_minbw_fk` int(30) DEFAULT NULL,
   `qt_maxcon_fk` int(30) DEFAULT NULL,
+  `qt_domain_forwarders_in` INT(6) NOT NULL DEFAULT '0',
   `qt_filesize_fk` int(30) DEFAULT NULL,
   `qt_filespeed_fk` int(30) DEFAULT NULL,
   `qt_filetype_vc` varchar(30) NOT NULL DEFAULT '*',
